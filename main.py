@@ -19,6 +19,8 @@ def main() -> None:
     encoded = text.encode("utf-8")
     if not 1 <= len(text) <= 280:
         raise ValueError("joke must be 1-280 characters")
+    if len(encoded) > 280:
+        raise ValueError("joke must fit in 280 bytes as UTF-8")
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
     os.makedirs(out_dir, exist_ok=True)
     with open(os.path.join(out_dir, "entry.txt"), "wb") as f:
